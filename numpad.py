@@ -5,9 +5,18 @@ Importing this module will provide the following classes:
                    | Python code.
     Scope          : A level of variables and their associated values.
     NullScope      : Starting scope for a program.
+    FuncExpression : A function that can be called with provided parameters.
     Expression     : A simple expression containing a single piece of data.
     OperExpression : Expression representing some operation between two other
                    | expressions.
+    StatementBlock : Block of statements to all be run in a row.
+    StatementSet   : Statement that sets the value of a variable to an
+                   | expression's value.
+    StatementDef   : Statement that defines a function.
+    StatementIf    : Statement that runs its block if its expression doesn't
+                   | equal 0.
+    StatementWhile : Statement that runs its block as long as its expression
+                   | doesn't equal 0.
 """
 
 from math import log
@@ -84,7 +93,7 @@ class Scope:
         """
         return self._parent
 
-    def child(self, variables = None):
+    def child(self, variables=None):
         """Create a new Scope with this object as its parent.
 
         Parameters:
@@ -109,7 +118,7 @@ class NullScope(Scope):
     Inherits from Scope.
     """
 
-    def __init__(self, variables = None):
+    def __init__(self, variables=None):
         """Construct a new scope for keeping track of variables."""
         super().__init__(None, variables)
 
@@ -159,8 +168,8 @@ class FuncExpression:
         """
         return self
 
-    def run(self, scope, params = None):
-        """Creates a new child Scope and runs the statment block.
+    def run(self, scope, params=None):
+        """Create a new child Scope and runs the statment block.
 
         Parameters:
             scope  : Scope object containing available variables.
@@ -229,10 +238,10 @@ class OperExpression:
         _op    : str object representing some operation.
         _r     : Expression object on the right side.
     """
-    
+
     @staticmethod
     def _divide_int_int(val_l, val_r):
-        """Creates a list representing the decimal result of a division.
+        """Create a list representing the decimal result of a division.
 
         Parameters:
             val_l : int for numerator.
@@ -242,7 +251,7 @@ class OperExpression:
             list with three features:
                 2. Integer representation, scaled up to keep decimal detail.
                 3. Exponent.
-        
+
         To transform back into a float, multiply the first element by 10 to
         the power of the second element.
         """
@@ -257,35 +266,35 @@ class OperExpression:
         ]
 
     oper_int_int = {
-        '..' : lambda x, y : int(x == y),
-        '.+' : lambda x, y : int(x > y),
-        '.-' : lambda x, y : int(x < y),
-        '+'  : lambda x, y : x + y,
-        '-'  : lambda x, y : x - y,
-        '*'  : lambda x, y : x * y,
-        '/'  : _divide_int_int.__func__,
-        '*+' : lambda x, y : x ** y,
-        '*-' : lambda x, y : log(x) / log(y),
-        '/+' : lambda x, y : x % y,
-        '/-' : lambda x, y : x // y
+        '..': lambda x, y: int(x == y),
+        '.+': lambda x, y: int(x > y),
+        '.-': lambda x, y: int(x < y),
+        '+': lambda x, y: x + y,
+        '-': lambda x, y: x - y,
+        '*': lambda x, y: x * y,
+        '/': _divide_int_int.__func__,
+        '*+': lambda x, y: x ** y,
+        '*-': lambda x, y: log(x) / log(y),
+        '/+': lambda x, y: x % y,
+        '/-': lambda x, y: x // y
     }
 
     oper_list_int = {
-        '..' : lambda x, y : len(x) == y,
-        '.+' : lambda x, y : len(x) > y,
-        '.-' : lambda x, y : len(x) < y,
-        '+'  : lambda x, y : x + [y],
-        '-'  : lambda x, y : x[:y] + x[y+1:],
-        '/'  : lambda x, y : x[y]
+        '..': lambda x, y: len(x) == y,
+        '.+': lambda x, y: len(x) > y,
+        '.-': lambda x, y: len(x) < y,
+        '+': lambda x, y: x + [y],
+        '-': lambda x, y: x[:y] + x[y+1:],
+        '/': lambda x, y: x[y]
     }
 
     oper_list_list = {
-        '..' : lambda x, y : x == y,
-        '.+' : lambda x, y : len(x) > len(y),
-        '.-' : lambda x, y : len(x) < len(y),
-        '+'  : lambda x, y : x + y,
-        '/+' : lambda x, y : all(i in x for i in y),
-        '/-' : lambda x, y : all(i in y for i in x)
+        '..': lambda x, y: x == y,
+        '.+': lambda x, y: len(x) > len(y),
+        '.-': lambda x, y: len(x) < len(y),
+        '+': lambda x, y: x + y,
+        '/+': lambda x, y: all(i in x for i in y),
+        '/-': lambda x, y: all(i in y for i in x)
     }
 
     def __init__(self, expr_l, oper, expr_r):
@@ -331,7 +340,7 @@ class OperExpression:
             if VERBOSE:
                 print("Function call:", val_l, val_r, "->", value)
             return value
-        
+
         if type_l == list and type_r == int:
             if self._op not in OperExpression.oper_list_int:
                 raise NumpadError(
