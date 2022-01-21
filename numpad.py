@@ -55,7 +55,7 @@ class Scope:
         else:
             self._variables = {}
 
-    def evaluate(self, variable_name):
+    def get_value(self, variable_name):
         """Get the value associated with the given variable name.
 
         Parameters:
@@ -74,7 +74,7 @@ class Scope:
 
         if variable_name in self._variables:
             return self._variables[variable_name]
-        return self._parent.evaluate(variable_name)
+        return self._parent.get_value(variable_name)
 
     def set_value(self, variable_name, value):
         """Change one of the variables in this scope to the given value.
@@ -122,7 +122,7 @@ class NullScope(Scope):
         """Construct a new scope for keeping track of variables."""
         super().__init__(None, variables)
 
-    def evaluate(self, variable_name):
+    def get_value(self, variable_name):
         """Get the value associated with the given variable name.
 
         Parameters:
@@ -181,7 +181,7 @@ class FuncExpression:
         )
         child.set_value("*00", 0)
         self._stmt.run(child)
-        return child.evaluate("*00")
+        return child.get_value("*00")
 
 
 class Expression:
@@ -220,7 +220,7 @@ class Expression:
             resolve variables to their values.
         """
         if self._type == str:
-            value = scope.evaluate(self._value)
+            value = scope.get_value(self._value)
         elif self._type == list:
             value = [ele.evaluate(scope) for ele in self._value]
         else:

@@ -21,7 +21,7 @@ def main(args):
         args.param_delim
     )
 
-    print("Result:", final_value)
+    print(final_value)
 
 if __name__ == "__main__":
     args = argu.parse_args()

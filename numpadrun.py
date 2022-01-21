@@ -156,4 +156,4 @@ def run(file_path, param=None, param_delim=','):
 
     program.run(scope)
 
-    return scope.evaluate("*00")
+    return scope.get_value("*00")
