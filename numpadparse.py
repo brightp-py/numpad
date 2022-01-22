@@ -55,6 +55,10 @@ def p_if(p):
     'if : N D'
     pass
 
+def p_else(p):
+    'else : S D'
+    pass
+
 def p_while(p):
     'while : N A D'
     pass
@@ -99,25 +103,39 @@ def p_expr(p):
         p[0] = OperExpression(p[1], p[2], p[3])
 
 def p_function_def(p):
-    '''stmt : set NUMBER DOT paramlist block
-    '''
+    'stmt_def : set NUMBER DOT paramlist block'
     p[0] = StatementDef(p[2], p[4], p[5])
 
 def p_stmt_set(p):
-    'stmt : set NUMBER DOT expr'
+    'stmt_set : set NUMBER DOT expr'
     p[0] = StatementSet(p[2], p[4])
 
 def p_stmt_set_return(p):
-    'stmt : set ZERO ZERO DOT expr'
+    'stmt_ret : set ZERO ZERO DOT expr'
     p[0] = StatementSet('00', p[5])
 
 def p_stmt_if(p):
-    'stmt : if expr block'
+    'stmt_if : if expr block'
     p[0] = StatementIf(p[2], p[3])
 
+def p_stmt_else(p):
+    'stmt_elif : stmt_if else block'
+    p[1].set_else(p[3])
+    p[0] = p[1]
+
 def p_stmt_while(p):
-    'stmt : while expr block'
+    'stmt_while : while expr block'
     p[0] = StatementWhile(p[2], p[3])
+
+def p_stmt(p):
+    '''stmt : stmt_def
+            | stmt_set
+            | stmt_ret
+            | stmt_if
+            | stmt_elif
+            | stmt_while
+    '''
+    p[0] = p[1]
 
 def p_create_block(p):
     'open_block : stmt'

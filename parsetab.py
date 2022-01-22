@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'programleftOP0leftOP1leftOP2leftOP3rightMINA D DOT M N NUMBER S ZEROvar : M NUMBER\n           | M ZERO NUMBER\n    op0 : DOT DOT\n           | DOT S\n           | DOT A\n    op1 : S\n           | A\n    op2 : D\n           | M\n    op3 : D A\n           | M A\n           | D S\n           | M S\n    set : N Mif : N Dwhile : N A Dlist_open : D DOTlist_open : list_open expr DOTlist : list_open expr D DOTparamlist : N NUMBER DOTparamlist : N NUMBER DOT DOT NUMBER paramlistexpr : NUMBER\n            | ZERO NUMBER   %prec MIN\n            | ZERO\n            | var\n            | list\n            | expr op0 expr %prec OP0\n            | expr op1 expr %prec OP1\n            | expr op2 expr %prec OP2\n            | expr op3 expr %prec OP3\n    stmt : set NUMBER DOT paramlist block\n    stmt : set NUMBER DOT exprstmt : set ZERO ZERO DOT exprstmt : if expr blockstmt : while expr blockopen_block : stmtopen_block : open_block stmtblock : open_block N\n    program : blockprogram : program N'
+_lr_signature = 'programleftOP0leftOP1leftOP2leftOP3rightMINA D DOT M N NUMBER S ZEROvar : M NUMBER\n           | M ZERO NUMBER\n    op0 : DOT DOT\n           | DOT S\n           | DOT A\n    op1 : S\n           | A\n    op2 : D\n           | M\n    op3 : D A\n           | M A\n           | D S\n           | M S\n    set : N Mif : N Delse : S Dwhile : N A Dlist_open : D DOTlist_open : list_open expr DOTlist : list_open expr D DOTparamlist : N NUMBER DOTparamlist : N NUMBER DOT DOT NUMBER paramlistexpr : NUMBER\n            | ZERO NUMBER   %prec MIN\n            | ZERO\n            | var\n            | list\n            | expr op0 expr %prec OP0\n            | expr op1 expr %prec OP1\n            | expr op2 expr %prec OP2\n            | expr op3 expr %prec OP3\n    stmt_def : set NUMBER DOT paramlist blockstmt_set : set NUMBER DOT exprstmt_ret : set ZERO ZERO DOT exprstmt_if : if expr blockstmt_elif : stmt_if else blockstmt_while : while expr blockstmt : stmt_def\n            | stmt_set\n            | stmt_ret\n            | stmt_if\n            | stmt_elif\n            | stmt_while\n    open_block : stmtopen_block : open_block stmtblock : open_block N\n    program : blockprogram : program N'
     
-_lr_action_items = {'N':([0,1,2,4,5,9,13,14,17,18,19,20,21,25,27,29,39,40,44,45,46,49,50,51,52,60,63,65,66,67,69,70,],[3,9,-39,13,-36,-40,-38,-37,3,-22,-24,-25,-26,3,47,-34,-23,-1,-35,3,-32,-27,-28,-29,-30,-2,-31,-33,-19,-20,47,-21,]),'$end':([1,2,9,13,],[0,-39,-40,-38,]),'M':([3,7,8,11,13,17,18,19,20,21,23,25,26,27,30,31,32,33,35,36,37,38,39,40,42,43,46,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,65,66,],[10,22,22,-15,10,38,-22,-24,-25,-26,22,38,-16,22,22,22,22,22,-6,-7,-8,-9,-23,-1,38,-17,38,22,-27,-28,-29,-30,-3,-4,-5,-10,-12,-11,-13,-2,-8,-18,38,-19,]),'D':([3,7,8,11,12,13,17,18,19,20,21,23,25,26,27,30,31,32,33,35,36,37,38,39,40,42,43,46,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,65,66,],[11,24,24,-15,26,11,37,-22,-24,-25,-26,24,37,-16,24,24,24,24,24,-6,-7,-8,-9,-23,-1,61,-17,37,24,-27,-28,-29,-30,-3,-4,-5,-10,-12,-11,-13,-2,-8,-18,37,-19,]),'A':([3,13,17,18,19,20,21,25,34,37,38,39,40,42,46,49,50,51,52,60,61,62,65,66,],[12,12,36,-22,-24,-25,-26,36,55,56,58,-23,-1,36,36,-27,-28,-29,-30,-2,56,55,36,-19,]),'NUMBER':([6,7,8,10,11,19,22,23,26,27,30,31,32,33,35,36,37,38,41,43,47,48,53,54,55,56,57,58,59,61,62,68,],[15,18,18,-14,-15,39,40,18,-16,18,18,18,18,18,-6,-7,-8,-9,60,-17,64,18,-3,-4,-5,-10,-12,-11,-13,-8,-18,69,]),'ZERO':([6,7,8,10,11,16,22,23,26,27,30,31,32,33,35,36,37,38,43,48,53,54,55,56,57,58,59,61,62,],[16,19,19,-14,-15,28,41,19,-16,19,19,19,19,19,-6,-7,-8,-9,-17,19,-3,-4,-5,-10,-12,-11,-13,-8,-18,]),'DOT':([15,17,18,19,20,21,24,25,28,34,39,40,42,46,49,50,51,52,60,61,62,64,65,66,67,],[27,34,-22,-24,-25,-26,43,34,48,53,-23,-1,62,34,-27,-28,-29,-30,-2,66,53,67,34,-19,68,]),'S':([17,18,19,20,21,25,34,37,38,39,40,42,46,49,50,51,52,60,61,62,65,66,],[35,-22,-24,-25,-26,35,54,57,59,-23,-1,35,35,-27,-28,-29,-30,-2,57,54,35,-19,]),}
+_lr_action_items = {'N':([0,1,2,4,5,6,7,8,9,10,11,15,19,20,21,25,26,27,28,29,33,35,36,37,39,49,50,54,55,56,59,60,61,62,70,73,75,76,77,79,80,],[3,15,-47,19,-44,-38,-39,-40,-41,-42,-43,-48,-46,-45,3,3,-23,-25,-26,-27,3,-36,-16,57,-35,-24,-1,-37,3,-33,-28,-29,-30,-31,-2,-32,-34,-20,-21,57,-22,]),'$end':([1,2,15,19,],[0,-47,-48,-46,]),'M':([3,13,14,17,19,25,26,27,28,29,31,33,34,37,40,41,42,43,45,46,47,48,49,50,52,53,56,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,75,76,],[16,30,30,-15,16,48,-23,-25,-26,-27,30,48,-17,30,30,30,30,30,-6,-7,-8,-9,-24,-1,48,-18,48,30,-28,-29,-30,-31,-3,-4,-5,-10,-12,-11,-13,-2,-8,-19,48,-20,]),'D':([3,13,14,17,18,19,22,25,26,27,28,29,31,33,34,37,40,41,42,43,45,46,47,48,49,50,52,53,56,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,75,76,],[17,32,32,-15,34,17,36,47,-23,-25,-26,-27,32,47,-17,32,32,32,32,32,-6,-7,-8,-9,-24,-1,71,-18,47,32,-28,-29,-30,-31,-3,-4,-5,-10,-12,-11,-13,-2,-8,-19,47,-20,]),'A':([3,19,25,26,27,28,29,33,44,47,48,49,50,52,56,59,60,61,62,70,71,72,75,76,],[18,18,46,-23,-25,-26,-27,46,65,66,68,-24,-1,46,46,-28,-29,-30,-31,-2,66,65,46,-20,]),'S':([9,19,25,26,27,28,29,33,39,44,47,48,49,50,52,56,59,60,61,62,70,71,72,75,76,],[22,-46,45,-23,-25,-26,-27,45,-35,64,67,69,-24,-1,45,45,-28,-29,-30,-31,-2,67,64,45,-20,]),'NUMBER':([12,13,14,16,17,27,30,31,34,37,40,41,42,43,45,46,47,48,51,53,57,58,63,64,65,66,67,68,69,71,72,78,],[23,26,26,-14,-15,49,50,26,-17,26,26,26,26,26,-6,-7,-8,-9,70,-18,74,26,-3,-4,-5,-10,-12,-11,-13,-8,-19,79,]),'ZERO':([12,13,14,16,17,24,30,31,34,37,40,41,42,43,45,46,47,48,53,58,63,64,65,66,67,68,69,71,72,],[24,27,27,-14,-15,38,51,27,-17,27,27,27,27,27,-6,-7,-8,-9,-18,27,-3,-4,-5,-10,-12,-11,-13,-8,-19,]),'DOT':([23,25,26,27,28,29,32,33,38,44,49,50,52,56,59,60,61,62,70,71,72,74,75,76,77,],[37,44,-23,-25,-26,-27,53,44,58,63,-24,-1,72,44,-28,-29,-30,-31,-2,76,63,77,44,-20,78,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'block':([0,17,25,45,],[2,29,44,63,]),'open_block':([0,17,25,45,],[4,4,4,4,]),'stmt':([0,4,17,25,45,],[5,14,5,5,5,]),'set':([0,4,17,25,45,],[6,6,6,6,6,]),'if':([0,4,17,25,45,],[7,7,7,7,7,]),'while':([0,4,17,25,45,],[8,8,8,8,8,]),'expr':([7,8,23,27,30,31,32,33,48,],[17,25,42,46,49,50,51,52,65,]),'var':([7,8,23,27,30,31,32,33,48,],[20,20,20,20,20,20,20,20,20,]),'list':([7,8,23,27,30,31,32,33,48,],[21,21,21,21,21,21,21,21,21,]),'list_open':([7,8,23,27,30,31,32,33,48,],[23,23,23,23,23,23,23,23,23,]),'op0':([17,25,42,46,49,50,51,52,65,],[30,30,30,30,30,30,30,30,30,]),'op1':([17,25,42,46,49,50,51,52,65,],[31,31,31,31,31,31,31,31,31,]),'op2':([17,25,42,46,49,50,51,52,65,],[32,32,32,32,32,32,32,32,32,]),'op3':([17,25,42,46,49,50,51,52,65,],[33,33,33,33,33,33,33,33,33,]),'paramlist':([27,69,],[45,70,]),}
+_lr_goto_items = {'program':([0,],[1,]),'block':([0,21,25,33,55,],[2,35,39,54,73,]),'open_block':([0,21,25,33,55,],[4,4,4,4,4,]),'stmt':([0,4,21,25,33,55,],[5,20,5,5,5,5,]),'stmt_def':([0,4,21,25,33,55,],[6,6,6,6,6,6,]),'stmt_set':([0,4,21,25,33,55,],[7,7,7,7,7,7,]),'stmt_ret':([0,4,21,25,33,55,],[8,8,8,8,8,8,]),'stmt_if':([0,4,21,25,33,55,],[9,9,9,9,9,9,]),'stmt_elif':([0,4,21,25,33,55,],[10,10,10,10,10,10,]),'stmt_while':([0,4,21,25,33,55,],[11,11,11,11,11,11,]),'set':([0,4,21,25,33,55,],[12,12,12,12,12,12,]),'if':([0,4,21,25,33,55,],[13,13,13,13,13,13,]),'while':([0,4,21,25,33,55,],[14,14,14,14,14,14,]),'else':([9,],[21,]),'expr':([13,14,31,37,40,41,42,43,58,],[25,33,52,56,59,60,61,62,75,]),'var':([13,14,31,37,40,41,42,43,58,],[28,28,28,28,28,28,28,28,28,]),'list':([13,14,31,37,40,41,42,43,58,],[29,29,29,29,29,29,29,29,29,]),'list_open':([13,14,31,37,40,41,42,43,58,],[31,31,31,31,31,31,31,31,31,]),'op0':([25,33,52,56,59,60,61,62,75,],[40,40,40,40,40,40,40,40,40,]),'op1':([25,33,52,56,59,60,61,62,75,],[41,41,41,41,41,41,41,41,41,]),'op2':([25,33,52,56,59,60,61,62,75,],[42,42,42,42,42,42,42,42,42,]),'op3':([25,33,52,56,59,60,61,62,75,],[43,43,43,43,43,43,43,43,43,]),'paramlist':([37,79,],[55,80,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -42,29 +42,37 @@ _lr_productions = [
   ('op3 -> M S','op3',2,'p_op_3','numpadparse.py',46),
   ('set -> N M','set',2,'p_set','numpadparse.py',51),
   ('if -> N D','if',2,'p_if','numpadparse.py',55),
-  ('while -> N A D','while',3,'p_while','numpadparse.py',59),
-  ('list_open -> D DOT','list_open',2,'p_list_create','numpadparse.py',63),
-  ('list_open -> list_open expr DOT','list_open',3,'p_list_append','numpadparse.py',67),
-  ('list -> list_open expr D DOT','list',4,'p_list_close','numpadparse.py',71),
-  ('paramlist -> N NUMBER DOT','paramlist',3,'p_param_create','numpadparse.py',75),
-  ('paramlist -> N NUMBER DOT DOT NUMBER paramlist','paramlist',6,'p_param_def','numpadparse.py',79),
-  ('expr -> NUMBER','expr',1,'p_expr','numpadparse.py',84),
-  ('expr -> ZERO NUMBER','expr',2,'p_expr','numpadparse.py',85),
-  ('expr -> ZERO','expr',1,'p_expr','numpadparse.py',86),
-  ('expr -> var','expr',1,'p_expr','numpadparse.py',87),
-  ('expr -> list','expr',1,'p_expr','numpadparse.py',88),
-  ('expr -> expr op0 expr','expr',3,'p_expr','numpadparse.py',89),
-  ('expr -> expr op1 expr','expr',3,'p_expr','numpadparse.py',90),
-  ('expr -> expr op2 expr','expr',3,'p_expr','numpadparse.py',91),
-  ('expr -> expr op3 expr','expr',3,'p_expr','numpadparse.py',92),
-  ('stmt -> set NUMBER DOT paramlist block','stmt',5,'p_function_def','numpadparse.py',102),
-  ('stmt -> set NUMBER DOT expr','stmt',4,'p_stmt_set','numpadparse.py',107),
-  ('stmt -> set ZERO ZERO DOT expr','stmt',5,'p_stmt_set_return','numpadparse.py',111),
-  ('stmt -> if expr block','stmt',3,'p_stmt_if','numpadparse.py',115),
-  ('stmt -> while expr block','stmt',3,'p_stmt_while','numpadparse.py',119),
-  ('open_block -> stmt','open_block',1,'p_create_block','numpadparse.py',123),
-  ('open_block -> open_block stmt','open_block',2,'p_append_block','numpadparse.py',128),
-  ('block -> open_block N','block',2,'p_close_block','numpadparse.py',133),
-  ('program -> block','program',1,'p_program','numpadparse.py',138),
-  ('program -> program N','program',2,'p_extra_newlines','numpadparse.py',142),
+  ('else -> S D','else',2,'p_else','numpadparse.py',59),
+  ('while -> N A D','while',3,'p_while','numpadparse.py',63),
+  ('list_open -> D DOT','list_open',2,'p_list_create','numpadparse.py',67),
+  ('list_open -> list_open expr DOT','list_open',3,'p_list_append','numpadparse.py',71),
+  ('list -> list_open expr D DOT','list',4,'p_list_close','numpadparse.py',75),
+  ('paramlist -> N NUMBER DOT','paramlist',3,'p_param_create','numpadparse.py',79),
+  ('paramlist -> N NUMBER DOT DOT NUMBER paramlist','paramlist',6,'p_param_def','numpadparse.py',83),
+  ('expr -> NUMBER','expr',1,'p_expr','numpadparse.py',88),
+  ('expr -> ZERO NUMBER','expr',2,'p_expr','numpadparse.py',89),
+  ('expr -> ZERO','expr',1,'p_expr','numpadparse.py',90),
+  ('expr -> var','expr',1,'p_expr','numpadparse.py',91),
+  ('expr -> list','expr',1,'p_expr','numpadparse.py',92),
+  ('expr -> expr op0 expr','expr',3,'p_expr','numpadparse.py',93),
+  ('expr -> expr op1 expr','expr',3,'p_expr','numpadparse.py',94),
+  ('expr -> expr op2 expr','expr',3,'p_expr','numpadparse.py',95),
+  ('expr -> expr op3 expr','expr',3,'p_expr','numpadparse.py',96),
+  ('stmt_def -> set NUMBER DOT paramlist block','stmt_def',5,'p_function_def','numpadparse.py',106),
+  ('stmt_set -> set NUMBER DOT expr','stmt_set',4,'p_stmt_set','numpadparse.py',110),
+  ('stmt_ret -> set ZERO ZERO DOT expr','stmt_ret',5,'p_stmt_set_return','numpadparse.py',114),
+  ('stmt_if -> if expr block','stmt_if',3,'p_stmt_if','numpadparse.py',118),
+  ('stmt_elif -> stmt_if else block','stmt_elif',3,'p_stmt_else','numpadparse.py',122),
+  ('stmt_while -> while expr block','stmt_while',3,'p_stmt_while','numpadparse.py',127),
+  ('stmt -> stmt_def','stmt',1,'p_stmt','numpadparse.py',131),
+  ('stmt -> stmt_set','stmt',1,'p_stmt','numpadparse.py',132),
+  ('stmt -> stmt_ret','stmt',1,'p_stmt','numpadparse.py',133),
+  ('stmt -> stmt_if','stmt',1,'p_stmt','numpadparse.py',134),
+  ('stmt -> stmt_elif','stmt',1,'p_stmt','numpadparse.py',135),
+  ('stmt -> stmt_while','stmt',1,'p_stmt','numpadparse.py',136),
+  ('open_block -> stmt','open_block',1,'p_create_block','numpadparse.py',140),
+  ('open_block -> open_block stmt','open_block',2,'p_append_block','numpadparse.py',145),
+  ('block -> open_block N','block',2,'p_close_block','numpadparse.py',150),
+  ('program -> block','program',1,'p_program','numpadparse.py',155),
+  ('program -> program N','program',2,'p_extra_newlines','numpadparse.py',159),
 ]

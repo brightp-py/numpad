@@ -453,8 +453,9 @@ class StatementIf:
     """Statement that runs its block if its expression doesn't equal 0.
 
     Attributes:
-        _expr  : Expression object to be evaluated and checked.
-        _stmt  : StatementBlock object to potentially be run.
+        _expr      : Expression object to be evaluated and checked.
+        _stmt      : StatementBlock object to potentially be run.
+        _else_stmt : StatementBlock object to be run if the expression fails.
     """
 
     def __init__(self, expression, block):
@@ -466,6 +467,15 @@ class StatementIf:
         """
         self._expr = expression
         self._stmt = block
+        self._else_stmt = None
+    
+    def set_else(self, block):
+        """Add an else statement to be run if the expression is 0.
+
+        Parameters:
+            block : StatementBlock object to potentially be run.
+        """
+        self._else_stmt = block
 
     def run(self, scope):
         """Evaluate the expression and run the block if not 0."""
@@ -477,6 +487,8 @@ class StatementIf:
         else:
             if VERBOSE:
                 print("If statement failed")
+            if self._else_stmt:
+                self._else_stmt.run(scope)
 
 
 class StatementWhile(StatementIf):
