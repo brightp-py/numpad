@@ -1,0 +1,16 @@
+
+# Given an integer n (in base 10) and a base k between 2 and 10, return the 
+# sum of the digits of n after converting n from base 10 to base k.
+# Return the sum in base 10.
+
+*3371837.
+.2.
+.*1.*01
+.*2.0
+.*3.*02
+.+/*1.+0
+..*2.*1/+*3+*2
+..*1.*1/-*3
+..
+.*00.*2
+.
