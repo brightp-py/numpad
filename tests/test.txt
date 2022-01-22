@@ -1,4 +1,6 @@
 106
+# this is a comment
+# this is a second comment
 
 *3.
 .2.

@@ -267,9 +267,9 @@ class OperExpression:
         '+': lambda x, y: x + y,
         '-': lambda x, y: x - y,
         '*': lambda x, y: x * y,
-        '/': lambda x, y: _float_to_list(x / y),
+        '/': lambda x, y: OperExpression._float_to_list(x / y),
         '*+': lambda x, y: x ** y,
-        '*-': lambda x, y: _float_to_list(log(x) / log(y)),
+        '*-': lambda x, y: OperExpression._float_to_list(log(x) / log(y)),
         '/+': lambda x, y: x % y,
         '/-': lambda x, y: x // y
     }

@@ -17,7 +17,7 @@ t_S = r'-'
 t_A = r'\+'
 t_DOT = r'(?<!\n)\.'
 # t_ZERO = r'(?<!\d)0'
-# t_ignore = r'(?<=\n)\.+'
+t_ignore = r' '
 
 def t_NUMBER(t):
     r'([1-9]\d*)'
@@ -36,6 +36,10 @@ def t_N(t):
 
 def t_whitespace(t):
     r'(?<=\n)\.+'
+    pass
+
+def t_comment(t):
+    r'\#[^\n]*\n'
     pass
 
 def t_error(t):
