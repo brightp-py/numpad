@@ -240,30 +240,25 @@ class OperExpression:
     """
 
     @staticmethod
-    def _divide_int_int(val_l, val_r):
+    def _float_to_list(dec):
         """Create a list representing the decimal result of a division.
 
         Parameters:
-            val_l : int for numerator.
-            val_r : int for denominator.
+            dec : float.
 
         Returns:
-            list with three features:
+            list with two features:
                 2. Integer representation, scaled up to keep decimal detail.
                 3. Exponent.
 
         To transform back into a float, multiply the first element by 10 to
         the power of the second element.
         """
-        dec = val_l / val_r
         power = 0
         while dec % 1 and power < 10:
             power -= 1
             dec *= 10
-        return [
-            int(dec),
-            power
-        ]
+        return [int(dec), power]
 
     oper_int_int = {
         '..': lambda x, y: int(x == y),
@@ -272,9 +267,9 @@ class OperExpression:
         '+': lambda x, y: x + y,
         '-': lambda x, y: x - y,
         '*': lambda x, y: x * y,
-        '/': _divide_int_int.__func__,
+        '/': lambda x, y: _float_to_list(x / y),
         '*+': lambda x, y: x ** y,
-        '*-': lambda x, y: log(x) / log(y),
+        '*-': lambda x, y: _float_to_list(log(x) / log(y)),
         '/+': lambda x, y: x % y,
         '/-': lambda x, y: x // y
     }
