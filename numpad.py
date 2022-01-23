@@ -76,14 +76,26 @@ class Scope:
             return self._variables[variable_name]
         return self._parent.get_value(variable_name)
 
-    def set_value(self, variable_name, value):
+    def set_value(self, variable_name, value, indices=None):
         """Change one of the variables in this scope to the given value.
 
         Parameters:
             variable_name : A str object of the variable's name.
             value         : Expression object to be evaluated.
+            indices       : list of indices of the value to be modified,
+                          | assuming the variable is a list.
+                          | The first int is the index, and the following
+                          | are sub-indices.
         """
-        self._variables[variable_name] = value
+        if not indices:
+            self._variables[variable_name] = value
+        else:
+            to_change = self._variables[variable_name]
+            for i in indices[:-1]:
+                if isinstance(i, str):
+                    i = self.get_value(i)
+                to_change = to_change[i]
+            to_change[indices[-1]] = value
 
     def parent(self):
         """Get the parent scope.
@@ -281,8 +293,8 @@ class OperExpression:
         '+': lambda x, y: x + [y],
         '-': lambda x, y: x[:y] + x[y+1:],
         '/': lambda x, y: x[y],
-        '/+': lambda x, y : x[y:],
-        '/-': lambda x, y : x[:y]
+        '/+': lambda x, y: x[y:],
+        '/-': lambda x, y: x[:y]
     }
 
     oper_int_list = {
@@ -434,6 +446,56 @@ class StatementSet:
             print("Set", self._variable, "to", value)
 
 
+class StatementSetIndex:
+    """Statement that sets the value of a variable to an expression's value.
+
+    Attributes:
+        _variable : str representation of the variable being changed.
+        _indices  : list of index and sub-indices
+        _r        : Expression object on the right side.
+    """
+
+    def __init__(self, number, indices):
+        """Construct a statement that will set a variable's value.
+
+        Parameters:
+            number : int representing the variable to be set.
+            expr   : int representing index of the list to be modified.
+        """
+        self._variable = f"*{str(number)}"
+        self._indices = indices
+        self._r = None
+
+    def add_sub_index(self, index):
+        """Add a sub-index to be set (for lists of lists).
+
+        Parameters:
+            index : int of the index to be modified.
+                  | Index of the list at the last index provided.
+        """
+        self._indices.append(index)
+
+    def set_expr(self, expr):
+        """Set the expression to be evaluated and sent to the list.
+
+        Paramters:
+            expr : Expression object to be evaluated.
+        """
+        self._r = expr
+
+    def run(self, scope):
+        """Evaluate the variable's value to the evaluated expression.
+
+        Paramters:
+            scope : Scope object containing available variables.
+        """
+        value = self._r.evaluate(scope)
+        scope.set_value(self._variable, value, self._indices)
+        if VERBOSE:
+            print_ind = '[' + ']['.join(map(str, self._indices)) + ']'
+            print("Set", f"{self._variable}{print_ind}", "to", value)
+
+
 class StatementDef:
     """Statement that defines a function.
 
@@ -488,7 +550,7 @@ class StatementIf:
         self._expr = expression
         self._stmt = block
         self._else_stmt = None
-    
+
     def set_else(self, block):
         """Add an else statement to be run if the expression is 0.
 

@@ -115,6 +115,24 @@ def p_stmt_set(p):
     'stmt_set : set NUMBER DOT expr'
     p[0] = StatementSet(p[2], p[4])
 
+def p_stmt_set_index(p):
+    '''stmt_ind_open : set NUMBER D NUMBER
+                     | set NUMBER D ZERO
+                     | set NUMBER D var'''
+    p[0] = StatementSetIndex(p[2], [p[4]])
+
+def p_stmt_set_sub_index(p):
+    '''stmt_ind_open : stmt_ind_open D NUMBER
+                     | stmt_ind_open D ZERO
+                     | stmt_ind_open D var'''
+    p[1].add_sub_index(p[3])
+    p[0] = p[1]
+
+def p_stmt_set_index_close(p):
+    'stmt_ind : stmt_ind_open DOT expr'
+    p[1].set_expr(p[3])
+    p[0] = p[1]
+
 def p_stmt_set_return(p):
     'stmt_ret : set ZERO ZERO DOT expr'
     p[0] = StatementSet('00', p[5])
@@ -139,6 +157,7 @@ def p_stmt(p):
             | stmt_if
             | stmt_elif
             | stmt_while
+            | stmt_ind
     '''
     p[0] = p[1]
 
