@@ -275,21 +275,30 @@ class OperExpression:
     }
 
     oper_list_int = {
-        '..': lambda x, y: len(x) == y,
-        '.+': lambda x, y: len(x) > y,
-        '.-': lambda x, y: len(x) < y,
+        '..': lambda x, y: int(len(x) == y),
+        '.+': lambda x, y: int(len(x) > y),
+        '.-': lambda x, y: int(len(x) < y),
         '+': lambda x, y: x + [y],
         '-': lambda x, y: x[:y] + x[y+1:],
-        '/': lambda x, y: x[y]
+        '/': lambda x, y: x[y],
+        '/+': lambda x, y : x[y:],
+        '/-': lambda x, y : x[:y]
+    }
+
+    oper_int_list = {
+        '..': lambda x, y: int(x == len(y)),
+        '.+': lambda x, y: int(x > len(y)),
+        '.-': lambda x, y: int(x < len(y))
     }
 
     oper_list_list = {
-        '..': lambda x, y: x == y,
-        '.+': lambda x, y: len(x) > len(y),
-        '.-': lambda x, y: len(x) < len(y),
-        '+': lambda x, y: x + y,
-        '/+': lambda x, y: all(i in x for i in y),
-        '/-': lambda x, y: all(i in y for i in x)
+        '..': lambda x, y: int(x == y),
+        '.+': lambda x, y: int(len(x) > len(y)),
+        '.-': lambda x, y: int(len(x) < len(y)),
+        '+': lambda x, y: x + [y],
+        '*': lambda x, y: x + y,
+        '/+': lambda x, y: int(all(i in x for i in y)),
+        '/-': lambda x, y: int(all(i in y for i in x))
     }
 
     def __init__(self, expr_l, oper, expr_r):
@@ -329,7 +338,7 @@ class OperExpression:
         if type_l == FuncExpression and type_r == list:
             if self._op != '-':
                 raise NumpadError(
-                    "'-' operation not supported for func and list."
+                    f"'{self._op}' operation not supported for func and list."
                 )
             value = val_l.run(scope, val_r)
             if VERBOSE:
@@ -347,8 +356,19 @@ class OperExpression:
                 print("OperExpression:", val_l, self._op, val_r, "->", value)
             return value
 
+        if type_l == int and type_r == list:
+            if self._op not in OperExpression.oper_int_list:
+                raise NumpadError(
+                    f"'{self._op}' not supported between int and list."
+                )
+            operation = OperExpression.oper_int_list[self._op]
+            value = operation(val_l, val_r)
+            if VERBOSE:
+                print("OperExpression:", val_l, self._op, val_r, "->", value)
+            return value
+
         if type_l == list and type_r == list:
-            if self._op not in OperExpression.oper_list_int:
+            if self._op not in OperExpression.oper_list_list:
                 raise NumpadError(
                     f"'{self._op}' not supported between list and list."
                 )

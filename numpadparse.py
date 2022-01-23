@@ -76,6 +76,10 @@ def p_list_close(p):
     'list : list_open expr D DOT'
     p[0] = p[1] + [p[2]]
 
+def p_empty_list(p):
+    'list : D DOT DOT D'
+    p[0] = []
+
 def p_param_create(p):
     'paramlist : N NUMBER DOT'
     p[0] = [0] * p[2]

@@ -24,95 +24,96 @@ Rule 18    list_open -> D DOT
 Rule 19    list_open -> list_open expr DOT
 Rule 20    list_open -> list_open expr DOT N
 Rule 21    list -> list_open expr D DOT
-Rule 22    paramlist -> N NUMBER DOT
-Rule 23    paramlist -> N NUMBER DOT DOT NUMBER paramlist
-Rule 24    expr -> NUMBER
-Rule 25    expr -> ZERO NUMBER
-Rule 26    expr -> ZERO
-Rule 27    expr -> var
-Rule 28    expr -> list
-Rule 29    expr -> expr op0 expr
-Rule 30    expr -> expr op1 expr
-Rule 31    expr -> expr op2 expr
-Rule 32    expr -> expr op3 expr
-Rule 33    stmt_def -> set NUMBER DOT paramlist block
-Rule 34    stmt_set -> set NUMBER DOT expr
-Rule 35    stmt_ret -> set ZERO ZERO DOT expr
-Rule 36    stmt_if -> if expr block
-Rule 37    stmt_elif -> stmt_if else block
-Rule 38    stmt_while -> while expr block
-Rule 39    stmt -> stmt_def
-Rule 40    stmt -> stmt_set
-Rule 41    stmt -> stmt_ret
-Rule 42    stmt -> stmt_if
-Rule 43    stmt -> stmt_elif
-Rule 44    stmt -> stmt_while
-Rule 45    open_block -> stmt
-Rule 46    open_block -> open_block stmt
-Rule 47    block -> open_block N
-Rule 48    program -> block
-Rule 49    program -> program N
+Rule 22    list -> D DOT DOT D
+Rule 23    paramlist -> N NUMBER DOT
+Rule 24    paramlist -> N NUMBER DOT DOT NUMBER paramlist
+Rule 25    expr -> NUMBER
+Rule 26    expr -> ZERO NUMBER
+Rule 27    expr -> ZERO
+Rule 28    expr -> var
+Rule 29    expr -> list
+Rule 30    expr -> expr op0 expr
+Rule 31    expr -> expr op1 expr
+Rule 32    expr -> expr op2 expr
+Rule 33    expr -> expr op3 expr
+Rule 34    stmt_def -> set NUMBER DOT paramlist block
+Rule 35    stmt_set -> set NUMBER DOT expr
+Rule 36    stmt_ret -> set ZERO ZERO DOT expr
+Rule 37    stmt_if -> if expr block
+Rule 38    stmt_elif -> stmt_if else block
+Rule 39    stmt_while -> while expr block
+Rule 40    stmt -> stmt_def
+Rule 41    stmt -> stmt_set
+Rule 42    stmt -> stmt_ret
+Rule 43    stmt -> stmt_if
+Rule 44    stmt -> stmt_elif
+Rule 45    stmt -> stmt_while
+Rule 46    open_block -> stmt
+Rule 47    open_block -> open_block stmt
+Rule 48    block -> open_block N
+Rule 49    program -> block
+Rule 50    program -> program N
 
 Terminals, with rules where they appear
 
 A                    : 5 7 10 11 17
-D                    : 8 10 12 15 16 17 18 21
-DOT                  : 3 3 4 5 18 19 20 21 22 23 23 33 34 35
+D                    : 8 10 12 15 16 17 18 21 22 22
+DOT                  : 3 3 4 5 18 19 20 21 22 22 23 24 24 34 35 36
 M                    : 1 2 9 11 13 14
-N                    : 14 15 17 20 22 23 47 49
-NUMBER               : 1 2 22 23 23 24 25 33 34
+N                    : 14 15 17 20 23 24 48 50
+NUMBER               : 1 2 23 24 24 25 26 34 35
 S                    : 4 6 12 13 16
-ZERO                 : 2 25 26 35 35
+ZERO                 : 2 26 27 36 36
 error                : 
 
 Nonterminals, with rules where they appear
 
-block                : 33 36 37 38 48
-else                 : 37
-expr                 : 19 20 21 29 29 30 30 31 31 32 32 34 35 36 38
-if                   : 36
-list                 : 28
+block                : 34 37 38 39 49
+else                 : 38
+expr                 : 19 20 21 30 30 31 31 32 32 33 33 35 36 37 39
+if                   : 37
+list                 : 29
 list_open            : 19 20 21
-op0                  : 29
-op1                  : 30
-op2                  : 31
-op3                  : 32
-open_block           : 46 47
-paramlist            : 23 33
-program              : 49 0
-set                  : 33 34 35
-stmt                 : 45 46
-stmt_def             : 39
-stmt_elif            : 43
-stmt_if              : 37 42
-stmt_ret             : 41
-stmt_set             : 40
-stmt_while           : 44
-var                  : 27
-while                : 38
+op0                  : 30
+op1                  : 31
+op2                  : 32
+op3                  : 33
+open_block           : 47 48
+paramlist            : 24 34
+program              : 50 0
+set                  : 34 35 36
+stmt                 : 46 47
+stmt_def             : 40
+stmt_elif            : 44
+stmt_if              : 38 43
+stmt_ret             : 42
+stmt_set             : 41
+stmt_while           : 45
+var                  : 28
+while                : 39
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . program
-    (48) program -> . block
-    (49) program -> . program N
-    (47) block -> . open_block N
-    (45) open_block -> . stmt
-    (46) open_block -> . open_block stmt
-    (39) stmt -> . stmt_def
-    (40) stmt -> . stmt_set
-    (41) stmt -> . stmt_ret
-    (42) stmt -> . stmt_if
-    (43) stmt -> . stmt_elif
-    (44) stmt -> . stmt_while
-    (33) stmt_def -> . set NUMBER DOT paramlist block
-    (34) stmt_set -> . set NUMBER DOT expr
-    (35) stmt_ret -> . set ZERO ZERO DOT expr
-    (36) stmt_if -> . if expr block
-    (37) stmt_elif -> . stmt_if else block
-    (38) stmt_while -> . while expr block
+    (49) program -> . block
+    (50) program -> . program N
+    (48) block -> . open_block N
+    (46) open_block -> . stmt
+    (47) open_block -> . open_block stmt
+    (40) stmt -> . stmt_def
+    (41) stmt -> . stmt_set
+    (42) stmt -> . stmt_ret
+    (43) stmt -> . stmt_if
+    (44) stmt -> . stmt_elif
+    (45) stmt -> . stmt_while
+    (34) stmt_def -> . set NUMBER DOT paramlist block
+    (35) stmt_set -> . set NUMBER DOT expr
+    (36) stmt_ret -> . set ZERO ZERO DOT expr
+    (37) stmt_if -> . if expr block
+    (38) stmt_elif -> . stmt_if else block
+    (39) stmt_while -> . while expr block
     (14) set -> . N M
     (15) if -> . N D
     (17) while -> . N A D
@@ -136,17 +137,17 @@ state 0
 state 1
 
     (0) S' -> program .
-    (49) program -> program . N
+    (50) program -> program . N
 
     N               shift and go to state 15
 
 
 state 2
 
-    (48) program -> block .
+    (49) program -> block .
 
-    N               reduce using rule 48 (program -> block .)
-    $end            reduce using rule 48 (program -> block .)
+    N               reduce using rule 49 (program -> block .)
+    $end            reduce using rule 49 (program -> block .)
 
 
 state 3
@@ -162,20 +163,20 @@ state 3
 
 state 4
 
-    (47) block -> open_block . N
-    (46) open_block -> open_block . stmt
-    (39) stmt -> . stmt_def
-    (40) stmt -> . stmt_set
-    (41) stmt -> . stmt_ret
-    (42) stmt -> . stmt_if
-    (43) stmt -> . stmt_elif
-    (44) stmt -> . stmt_while
-    (33) stmt_def -> . set NUMBER DOT paramlist block
-    (34) stmt_set -> . set NUMBER DOT expr
-    (35) stmt_ret -> . set ZERO ZERO DOT expr
-    (36) stmt_if -> . if expr block
-    (37) stmt_elif -> . stmt_if else block
-    (38) stmt_while -> . while expr block
+    (48) block -> open_block . N
+    (47) open_block -> open_block . stmt
+    (40) stmt -> . stmt_def
+    (41) stmt -> . stmt_set
+    (42) stmt -> . stmt_ret
+    (43) stmt -> . stmt_if
+    (44) stmt -> . stmt_elif
+    (45) stmt -> . stmt_while
+    (34) stmt_def -> . set NUMBER DOT paramlist block
+    (35) stmt_set -> . set NUMBER DOT expr
+    (36) stmt_ret -> . set ZERO ZERO DOT expr
+    (37) stmt_if -> . if expr block
+    (38) stmt_elif -> . stmt_if else block
+    (39) stmt_while -> . while expr block
     (14) set -> . N M
     (15) if -> . N D
     (17) while -> . N A D
@@ -195,62 +196,62 @@ state 4
 
 state 5
 
-    (45) open_block -> stmt .
+    (46) open_block -> stmt .
 
-    N               reduce using rule 45 (open_block -> stmt .)
+    N               reduce using rule 46 (open_block -> stmt .)
 
 
 state 6
 
-    (39) stmt -> stmt_def .
+    (40) stmt -> stmt_def .
 
-    N               reduce using rule 39 (stmt -> stmt_def .)
+    N               reduce using rule 40 (stmt -> stmt_def .)
 
 
 state 7
 
-    (40) stmt -> stmt_set .
+    (41) stmt -> stmt_set .
 
-    N               reduce using rule 40 (stmt -> stmt_set .)
+    N               reduce using rule 41 (stmt -> stmt_set .)
 
 
 state 8
 
-    (41) stmt -> stmt_ret .
+    (42) stmt -> stmt_ret .
 
-    N               reduce using rule 41 (stmt -> stmt_ret .)
+    N               reduce using rule 42 (stmt -> stmt_ret .)
 
 
 state 9
 
-    (42) stmt -> stmt_if .
-    (37) stmt_elif -> stmt_if . else block
+    (43) stmt -> stmt_if .
+    (38) stmt_elif -> stmt_if . else block
     (16) else -> . S D
 
-    N               reduce using rule 42 (stmt -> stmt_if .)
+    N               reduce using rule 43 (stmt -> stmt_if .)
     S               shift and go to state 22
 
     else                           shift and go to state 21
 
 state 10
 
-    (43) stmt -> stmt_elif .
+    (44) stmt -> stmt_elif .
 
-    N               reduce using rule 43 (stmt -> stmt_elif .)
+    N               reduce using rule 44 (stmt -> stmt_elif .)
 
 
 state 11
 
-    (44) stmt -> stmt_while .
+    (45) stmt -> stmt_while .
 
-    N               reduce using rule 44 (stmt -> stmt_while .)
+    N               reduce using rule 45 (stmt -> stmt_while .)
 
 
 state 12
 
-    (33) stmt_def -> set . NUMBER DOT paramlist block
-    (34) stmt_set -> set . NUMBER DOT expr
-    (35) stmt_ret -> set . ZERO ZERO DOT expr
+    (34) stmt_def -> set . NUMBER DOT paramlist block
+    (35) stmt_set -> set . NUMBER DOT expr
+    (36) stmt_ret -> set . ZERO ZERO DOT expr
 
     NUMBER          shift and go to state 23
     ZERO            shift and go to state 24
@@ -258,19 +259,20 @@ state 12
 
 state 13
 
-    (36) stmt_if -> if . expr block
-    (24) expr -> . NUMBER
-    (25) expr -> . ZERO NUMBER
-    (26) expr -> . ZERO
-    (27) expr -> . var
-    (28) expr -> . list
-    (29) expr -> . expr op0 expr
-    (30) expr -> . expr op1 expr
-    (31) expr -> . expr op2 expr
-    (32) expr -> . expr op3 expr
+    (37) stmt_if -> if . expr block
+    (25) expr -> . NUMBER
+    (26) expr -> . ZERO NUMBER
+    (27) expr -> . ZERO
+    (28) expr -> . var
+    (29) expr -> . list
+    (30) expr -> . expr op0 expr
+    (31) expr -> . expr op1 expr
+    (32) expr -> . expr op2 expr
+    (33) expr -> . expr op3 expr
     (1) var -> . M NUMBER
     (2) var -> . M ZERO NUMBER
     (21) list -> . list_open expr D DOT
+    (22) list -> . D DOT DOT D
     (18) list_open -> . D DOT
     (19) list_open -> . list_open expr DOT
     (20) list_open -> . list_open expr DOT N
@@ -287,19 +289,20 @@ state 13
 
 state 14
 
-    (38) stmt_while -> while . expr block
-    (24) expr -> . NUMBER
-    (25) expr -> . ZERO NUMBER
-    (26) expr -> . ZERO
-    (27) expr -> . var
-    (28) expr -> . list
-    (29) expr -> . expr op0 expr
-    (30) expr -> . expr op1 expr
-    (31) expr -> . expr op2 expr
-    (32) expr -> . expr op3 expr
+    (39) stmt_while -> while . expr block
+    (25) expr -> . NUMBER
+    (26) expr -> . ZERO NUMBER
+    (27) expr -> . ZERO
+    (28) expr -> . var
+    (29) expr -> . list
+    (30) expr -> . expr op0 expr
+    (31) expr -> . expr op1 expr
+    (32) expr -> . expr op2 expr
+    (33) expr -> . expr op3 expr
     (1) var -> . M NUMBER
     (2) var -> . M ZERO NUMBER
     (21) list -> . list_open expr D DOT
+    (22) list -> . D DOT DOT D
     (18) list_open -> . D DOT
     (19) list_open -> . list_open expr DOT
     (20) list_open -> . list_open expr DOT N
@@ -316,10 +319,10 @@ state 14
 
 state 15
 
-    (49) program -> program N .
+    (50) program -> program N .
 
-    N               reduce using rule 49 (program -> program N .)
-    $end            reduce using rule 49 (program -> program N .)
+    N               reduce using rule 50 (program -> program N .)
+    $end            reduce using rule 50 (program -> program N .)
 
 
 state 16
@@ -349,14 +352,14 @@ state 18
 
 state 19
 
-    (47) block -> open_block N .
+    (48) block -> open_block N .
     (14) set -> N . M
     (15) if -> N . D
     (17) while -> N . A D
 
-    N               reduce using rule 47 (block -> open_block N .)
-    $end            reduce using rule 47 (block -> open_block N .)
-    S               reduce using rule 47 (block -> open_block N .)
+    N               reduce using rule 48 (block -> open_block N .)
+    $end            reduce using rule 48 (block -> open_block N .)
+    S               reduce using rule 48 (block -> open_block N .)
     M               shift and go to state 16
     D               shift and go to state 17
     A               shift and go to state 18
@@ -364,29 +367,29 @@ state 19
 
 state 20
 
-    (46) open_block -> open_block stmt .
+    (47) open_block -> open_block stmt .
 
-    N               reduce using rule 46 (open_block -> open_block stmt .)
+    N               reduce using rule 47 (open_block -> open_block stmt .)
 
 
 state 21
 
-    (37) stmt_elif -> stmt_if else . block
-    (47) block -> . open_block N
-    (45) open_block -> . stmt
-    (46) open_block -> . open_block stmt
-    (39) stmt -> . stmt_def
-    (40) stmt -> . stmt_set
-    (41) stmt -> . stmt_ret
-    (42) stmt -> . stmt_if
-    (43) stmt -> . stmt_elif
-    (44) stmt -> . stmt_while
-    (33) stmt_def -> . set NUMBER DOT paramlist block
-    (34) stmt_set -> . set NUMBER DOT expr
-    (35) stmt_ret -> . set ZERO ZERO DOT expr
-    (36) stmt_if -> . if expr block
-    (37) stmt_elif -> . stmt_if else block
-    (38) stmt_while -> . while expr block
+    (38) stmt_elif -> stmt_if else . block
+    (48) block -> . open_block N
+    (46) open_block -> . stmt
+    (47) open_block -> . open_block stmt
+    (40) stmt -> . stmt_def
+    (41) stmt -> . stmt_set
+    (42) stmt -> . stmt_ret
+    (43) stmt -> . stmt_if
+    (44) stmt -> . stmt_elif
+    (45) stmt -> . stmt_while
+    (34) stmt_def -> . set NUMBER DOT paramlist block
+    (35) stmt_set -> . set NUMBER DOT expr
+    (36) stmt_ret -> . set ZERO ZERO DOT expr
+    (37) stmt_if -> . if expr block
+    (38) stmt_elif -> . stmt_if else block
+    (39) stmt_while -> . while expr block
     (14) set -> . N M
     (15) if -> . N D
     (17) while -> . N A D
@@ -415,27 +418,27 @@ state 22
 
 state 23
 
-    (33) stmt_def -> set NUMBER . DOT paramlist block
-    (34) stmt_set -> set NUMBER . DOT expr
+    (34) stmt_def -> set NUMBER . DOT paramlist block
+    (35) stmt_set -> set NUMBER . DOT expr
 
     DOT             shift and go to state 37
 
 
 state 24
 
-    (35) stmt_ret -> set ZERO . ZERO DOT expr
+    (36) stmt_ret -> set ZERO . ZERO DOT expr
 
     ZERO            shift and go to state 38
 
 
 state 25
 
-    (36) stmt_if -> if expr . block
-    (29) expr -> expr . op0 expr
-    (30) expr -> expr . op1 expr
-    (31) expr -> expr . op2 expr
-    (32) expr -> expr . op3 expr
-    (47) block -> . open_block N
+    (37) stmt_if -> if expr . block
+    (30) expr -> expr . op0 expr
+    (31) expr -> expr . op1 expr
+    (32) expr -> expr . op2 expr
+    (33) expr -> expr . op3 expr
+    (48) block -> . open_block N
     (3) op0 -> . DOT DOT
     (4) op0 -> . DOT S
     (5) op0 -> . DOT A
@@ -447,20 +450,20 @@ state 25
     (11) op3 -> . M A
     (12) op3 -> . D S
     (13) op3 -> . M S
-    (45) open_block -> . stmt
-    (46) open_block -> . open_block stmt
-    (39) stmt -> . stmt_def
-    (40) stmt -> . stmt_set
-    (41) stmt -> . stmt_ret
-    (42) stmt -> . stmt_if
-    (43) stmt -> . stmt_elif
-    (44) stmt -> . stmt_while
-    (33) stmt_def -> . set NUMBER DOT paramlist block
-    (34) stmt_set -> . set NUMBER DOT expr
-    (35) stmt_ret -> . set ZERO ZERO DOT expr
-    (36) stmt_if -> . if expr block
-    (37) stmt_elif -> . stmt_if else block
-    (38) stmt_while -> . while expr block
+    (46) open_block -> . stmt
+    (47) open_block -> . open_block stmt
+    (40) stmt -> . stmt_def
+    (41) stmt -> . stmt_set
+    (42) stmt -> . stmt_ret
+    (43) stmt -> . stmt_if
+    (44) stmt -> . stmt_elif
+    (45) stmt -> . stmt_while
+    (34) stmt_def -> . set NUMBER DOT paramlist block
+    (35) stmt_set -> . set NUMBER DOT expr
+    (36) stmt_ret -> . set ZERO ZERO DOT expr
+    (37) stmt_if -> . if expr block
+    (38) stmt_elif -> . stmt_if else block
+    (39) stmt_while -> . while expr block
     (14) set -> . N M
     (15) if -> . N D
     (17) while -> . N A D
@@ -491,52 +494,52 @@ state 25
 
 state 26
 
-    (24) expr -> NUMBER .
+    (25) expr -> NUMBER .
 
-    DOT             reduce using rule 24 (expr -> NUMBER .)
-    S               reduce using rule 24 (expr -> NUMBER .)
-    A               reduce using rule 24 (expr -> NUMBER .)
-    D               reduce using rule 24 (expr -> NUMBER .)
-    M               reduce using rule 24 (expr -> NUMBER .)
-    N               reduce using rule 24 (expr -> NUMBER .)
+    DOT             reduce using rule 25 (expr -> NUMBER .)
+    S               reduce using rule 25 (expr -> NUMBER .)
+    A               reduce using rule 25 (expr -> NUMBER .)
+    D               reduce using rule 25 (expr -> NUMBER .)
+    M               reduce using rule 25 (expr -> NUMBER .)
+    N               reduce using rule 25 (expr -> NUMBER .)
 
 
 state 27
 
-    (25) expr -> ZERO . NUMBER
-    (26) expr -> ZERO .
+    (26) expr -> ZERO . NUMBER
+    (27) expr -> ZERO .
 
     NUMBER          shift and go to state 49
-    DOT             reduce using rule 26 (expr -> ZERO .)
-    S               reduce using rule 26 (expr -> ZERO .)
-    A               reduce using rule 26 (expr -> ZERO .)
-    D               reduce using rule 26 (expr -> ZERO .)
-    M               reduce using rule 26 (expr -> ZERO .)
-    N               reduce using rule 26 (expr -> ZERO .)
+    DOT             reduce using rule 27 (expr -> ZERO .)
+    S               reduce using rule 27 (expr -> ZERO .)
+    A               reduce using rule 27 (expr -> ZERO .)
+    D               reduce using rule 27 (expr -> ZERO .)
+    M               reduce using rule 27 (expr -> ZERO .)
+    N               reduce using rule 27 (expr -> ZERO .)
 
 
 state 28
 
-    (27) expr -> var .
+    (28) expr -> var .
 
-    DOT             reduce using rule 27 (expr -> var .)
-    S               reduce using rule 27 (expr -> var .)
-    A               reduce using rule 27 (expr -> var .)
-    D               reduce using rule 27 (expr -> var .)
-    M               reduce using rule 27 (expr -> var .)
-    N               reduce using rule 27 (expr -> var .)
+    DOT             reduce using rule 28 (expr -> var .)
+    S               reduce using rule 28 (expr -> var .)
+    A               reduce using rule 28 (expr -> var .)
+    D               reduce using rule 28 (expr -> var .)
+    M               reduce using rule 28 (expr -> var .)
+    N               reduce using rule 28 (expr -> var .)
 
 
 state 29
 
-    (28) expr -> list .
+    (29) expr -> list .
 
-    DOT             reduce using rule 28 (expr -> list .)
-    S               reduce using rule 28 (expr -> list .)
-    A               reduce using rule 28 (expr -> list .)
-    D               reduce using rule 28 (expr -> list .)
-    M               reduce using rule 28 (expr -> list .)
-    N               reduce using rule 28 (expr -> list .)
+    DOT             reduce using rule 29 (expr -> list .)
+    S               reduce using rule 29 (expr -> list .)
+    A               reduce using rule 29 (expr -> list .)
+    D               reduce using rule 29 (expr -> list .)
+    M               reduce using rule 29 (expr -> list .)
+    N               reduce using rule 29 (expr -> list .)
 
 
 state 30
@@ -553,18 +556,19 @@ state 31
     (21) list -> list_open . expr D DOT
     (19) list_open -> list_open . expr DOT
     (20) list_open -> list_open . expr DOT N
-    (24) expr -> . NUMBER
-    (25) expr -> . ZERO NUMBER
-    (26) expr -> . ZERO
-    (27) expr -> . var
-    (28) expr -> . list
-    (29) expr -> . expr op0 expr
-    (30) expr -> . expr op1 expr
-    (31) expr -> . expr op2 expr
-    (32) expr -> . expr op3 expr
+    (25) expr -> . NUMBER
+    (26) expr -> . ZERO NUMBER
+    (27) expr -> . ZERO
+    (28) expr -> . var
+    (29) expr -> . list
+    (30) expr -> . expr op0 expr
+    (31) expr -> . expr op1 expr
+    (32) expr -> . expr op2 expr
+    (33) expr -> . expr op3 expr
     (1) var -> . M NUMBER
     (2) var -> . M ZERO NUMBER
     (21) list -> . list_open expr D DOT
+    (22) list -> . D DOT DOT D
     (18) list_open -> . D DOT
     (19) list_open -> . list_open expr DOT
     (20) list_open -> . list_open expr DOT N
@@ -581,6 +585,7 @@ state 31
 
 state 32
 
+    (22) list -> D . DOT DOT D
     (18) list_open -> D . DOT
 
     DOT             shift and go to state 53
@@ -588,12 +593,12 @@ state 32
 
 state 33
 
-    (38) stmt_while -> while expr . block
-    (29) expr -> expr . op0 expr
-    (30) expr -> expr . op1 expr
-    (31) expr -> expr . op2 expr
-    (32) expr -> expr . op3 expr
-    (47) block -> . open_block N
+    (39) stmt_while -> while expr . block
+    (30) expr -> expr . op0 expr
+    (31) expr -> expr . op1 expr
+    (32) expr -> expr . op2 expr
+    (33) expr -> expr . op3 expr
+    (48) block -> . open_block N
     (3) op0 -> . DOT DOT
     (4) op0 -> . DOT S
     (5) op0 -> . DOT A
@@ -605,20 +610,20 @@ state 33
     (11) op3 -> . M A
     (12) op3 -> . D S
     (13) op3 -> . M S
-    (45) open_block -> . stmt
-    (46) open_block -> . open_block stmt
-    (39) stmt -> . stmt_def
-    (40) stmt -> . stmt_set
-    (41) stmt -> . stmt_ret
-    (42) stmt -> . stmt_if
-    (43) stmt -> . stmt_elif
-    (44) stmt -> . stmt_while
-    (33) stmt_def -> . set NUMBER DOT paramlist block
-    (34) stmt_set -> . set NUMBER DOT expr
-    (35) stmt_ret -> . set ZERO ZERO DOT expr
-    (36) stmt_if -> . if expr block
-    (37) stmt_elif -> . stmt_if else block
-    (38) stmt_while -> . while expr block
+    (46) open_block -> . stmt
+    (47) open_block -> . open_block stmt
+    (40) stmt -> . stmt_def
+    (41) stmt -> . stmt_set
+    (42) stmt -> . stmt_ret
+    (43) stmt -> . stmt_if
+    (44) stmt -> . stmt_elif
+    (45) stmt -> . stmt_while
+    (34) stmt_def -> . set NUMBER DOT paramlist block
+    (35) stmt_set -> . set NUMBER DOT expr
+    (36) stmt_ret -> . set ZERO ZERO DOT expr
+    (37) stmt_if -> . if expr block
+    (38) stmt_elif -> . stmt_if else block
+    (39) stmt_while -> . while expr block
     (14) set -> . N M
     (15) if -> . N D
     (17) while -> . N A D
@@ -659,9 +664,9 @@ state 34
 
 state 35
 
-    (37) stmt_elif -> stmt_if else block .
+    (38) stmt_elif -> stmt_if else block .
 
-    N               reduce using rule 37 (stmt_elif -> stmt_if else block .)
+    N               reduce using rule 38 (stmt_elif -> stmt_if else block .)
 
 
 state 36
@@ -673,22 +678,23 @@ state 36
 
 state 37
 
-    (33) stmt_def -> set NUMBER DOT . paramlist block
-    (34) stmt_set -> set NUMBER DOT . expr
-    (22) paramlist -> . N NUMBER DOT
-    (23) paramlist -> . N NUMBER DOT DOT NUMBER paramlist
-    (24) expr -> . NUMBER
-    (25) expr -> . ZERO NUMBER
-    (26) expr -> . ZERO
-    (27) expr -> . var
-    (28) expr -> . list
-    (29) expr -> . expr op0 expr
-    (30) expr -> . expr op1 expr
-    (31) expr -> . expr op2 expr
-    (32) expr -> . expr op3 expr
+    (34) stmt_def -> set NUMBER DOT . paramlist block
+    (35) stmt_set -> set NUMBER DOT . expr
+    (23) paramlist -> . N NUMBER DOT
+    (24) paramlist -> . N NUMBER DOT DOT NUMBER paramlist
+    (25) expr -> . NUMBER
+    (26) expr -> . ZERO NUMBER
+    (27) expr -> . ZERO
+    (28) expr -> . var
+    (29) expr -> . list
+    (30) expr -> . expr op0 expr
+    (31) expr -> . expr op1 expr
+    (32) expr -> . expr op2 expr
+    (33) expr -> . expr op3 expr
     (1) var -> . M NUMBER
     (2) var -> . M ZERO NUMBER
     (21) list -> . list_open expr D DOT
+    (22) list -> . D DOT DOT D
     (18) list_open -> . D DOT
     (19) list_open -> . list_open expr DOT
     (20) list_open -> . list_open expr DOT N
@@ -707,34 +713,35 @@ state 37
 
 state 38
 
-    (35) stmt_ret -> set ZERO ZERO . DOT expr
+    (36) stmt_ret -> set ZERO ZERO . DOT expr
 
     DOT             shift and go to state 58
 
 
 state 39
 
-    (36) stmt_if -> if expr block .
+    (37) stmt_if -> if expr block .
 
-    S               reduce using rule 36 (stmt_if -> if expr block .)
-    N               reduce using rule 36 (stmt_if -> if expr block .)
+    S               reduce using rule 37 (stmt_if -> if expr block .)
+    N               reduce using rule 37 (stmt_if -> if expr block .)
 
 
 state 40
 
-    (29) expr -> expr op0 . expr
-    (24) expr -> . NUMBER
-    (25) expr -> . ZERO NUMBER
-    (26) expr -> . ZERO
-    (27) expr -> . var
-    (28) expr -> . list
-    (29) expr -> . expr op0 expr
-    (30) expr -> . expr op1 expr
-    (31) expr -> . expr op2 expr
-    (32) expr -> . expr op3 expr
+    (30) expr -> expr op0 . expr
+    (25) expr -> . NUMBER
+    (26) expr -> . ZERO NUMBER
+    (27) expr -> . ZERO
+    (28) expr -> . var
+    (29) expr -> . list
+    (30) expr -> . expr op0 expr
+    (31) expr -> . expr op1 expr
+    (32) expr -> . expr op2 expr
+    (33) expr -> . expr op3 expr
     (1) var -> . M NUMBER
     (2) var -> . M ZERO NUMBER
     (21) list -> . list_open expr D DOT
+    (22) list -> . D DOT DOT D
     (18) list_open -> . D DOT
     (19) list_open -> . list_open expr DOT
     (20) list_open -> . list_open expr DOT N
@@ -751,19 +758,20 @@ state 40
 
 state 41
 
-    (30) expr -> expr op1 . expr
-    (24) expr -> . NUMBER
-    (25) expr -> . ZERO NUMBER
-    (26) expr -> . ZERO
-    (27) expr -> . var
-    (28) expr -> . list
-    (29) expr -> . expr op0 expr
-    (30) expr -> . expr op1 expr
-    (31) expr -> . expr op2 expr
-    (32) expr -> . expr op3 expr
+    (31) expr -> expr op1 . expr
+    (25) expr -> . NUMBER
+    (26) expr -> . ZERO NUMBER
+    (27) expr -> . ZERO
+    (28) expr -> . var
+    (29) expr -> . list
+    (30) expr -> . expr op0 expr
+    (31) expr -> . expr op1 expr
+    (32) expr -> . expr op2 expr
+    (33) expr -> . expr op3 expr
     (1) var -> . M NUMBER
     (2) var -> . M ZERO NUMBER
     (21) list -> . list_open expr D DOT
+    (22) list -> . D DOT DOT D
     (18) list_open -> . D DOT
     (19) list_open -> . list_open expr DOT
     (20) list_open -> . list_open expr DOT N
@@ -780,19 +788,20 @@ state 41
 
 state 42
 
-    (31) expr -> expr op2 . expr
-    (24) expr -> . NUMBER
-    (25) expr -> . ZERO NUMBER
-    (26) expr -> . ZERO
-    (27) expr -> . var
-    (28) expr -> . list
-    (29) expr -> . expr op0 expr
-    (30) expr -> . expr op1 expr
-    (31) expr -> . expr op2 expr
-    (32) expr -> . expr op3 expr
+    (32) expr -> expr op2 . expr
+    (25) expr -> . NUMBER
+    (26) expr -> . ZERO NUMBER
+    (27) expr -> . ZERO
+    (28) expr -> . var
+    (29) expr -> . list
+    (30) expr -> . expr op0 expr
+    (31) expr -> . expr op1 expr
+    (32) expr -> . expr op2 expr
+    (33) expr -> . expr op3 expr
     (1) var -> . M NUMBER
     (2) var -> . M ZERO NUMBER
     (21) list -> . list_open expr D DOT
+    (22) list -> . D DOT DOT D
     (18) list_open -> . D DOT
     (19) list_open -> . list_open expr DOT
     (20) list_open -> . list_open expr DOT N
@@ -809,19 +818,20 @@ state 42
 
 state 43
 
-    (32) expr -> expr op3 . expr
-    (24) expr -> . NUMBER
-    (25) expr -> . ZERO NUMBER
-    (26) expr -> . ZERO
-    (27) expr -> . var
-    (28) expr -> . list
-    (29) expr -> . expr op0 expr
-    (30) expr -> . expr op1 expr
-    (31) expr -> . expr op2 expr
-    (32) expr -> . expr op3 expr
+    (33) expr -> expr op3 . expr
+    (25) expr -> . NUMBER
+    (26) expr -> . ZERO NUMBER
+    (27) expr -> . ZERO
+    (28) expr -> . var
+    (29) expr -> . list
+    (30) expr -> . expr op0 expr
+    (31) expr -> . expr op1 expr
+    (32) expr -> . expr op2 expr
+    (33) expr -> . expr op3 expr
     (1) var -> . M NUMBER
     (2) var -> . M ZERO NUMBER
     (21) list -> . list_open expr D DOT
+    (22) list -> . D DOT DOT D
     (18) list_open -> . D DOT
     (19) list_open -> . list_open expr DOT
     (20) list_open -> . list_open expr DOT N
@@ -897,14 +907,14 @@ state 48
 
 state 49
 
-    (25) expr -> ZERO NUMBER .
+    (26) expr -> ZERO NUMBER .
 
-    DOT             reduce using rule 25 (expr -> ZERO NUMBER .)
-    S               reduce using rule 25 (expr -> ZERO NUMBER .)
-    A               reduce using rule 25 (expr -> ZERO NUMBER .)
-    D               reduce using rule 25 (expr -> ZERO NUMBER .)
-    M               reduce using rule 25 (expr -> ZERO NUMBER .)
-    N               reduce using rule 25 (expr -> ZERO NUMBER .)
+    DOT             reduce using rule 26 (expr -> ZERO NUMBER .)
+    S               reduce using rule 26 (expr -> ZERO NUMBER .)
+    A               reduce using rule 26 (expr -> ZERO NUMBER .)
+    D               reduce using rule 26 (expr -> ZERO NUMBER .)
+    M               reduce using rule 26 (expr -> ZERO NUMBER .)
+    N               reduce using rule 26 (expr -> ZERO NUMBER .)
 
 
 state 50
@@ -931,10 +941,10 @@ state 52
     (21) list -> list_open expr . D DOT
     (19) list_open -> list_open expr . DOT
     (20) list_open -> list_open expr . DOT N
-    (29) expr -> expr . op0 expr
-    (30) expr -> expr . op1 expr
-    (31) expr -> expr . op2 expr
-    (32) expr -> expr . op3 expr
+    (30) expr -> expr . op0 expr
+    (31) expr -> expr . op1 expr
+    (32) expr -> expr . op2 expr
+    (33) expr -> expr . op3 expr
     (3) op0 -> . DOT DOT
     (4) op0 -> . DOT S
     (5) op0 -> . DOT A
@@ -960,8 +970,10 @@ state 52
 
 state 53
 
+    (22) list -> D DOT . DOT D
     (18) list_open -> D DOT .
 
+    DOT             shift and go to state 73
     NUMBER          reduce using rule 18 (list_open -> D DOT .)
     ZERO            reduce using rule 18 (list_open -> D DOT .)
     M               reduce using rule 18 (list_open -> D DOT .)
@@ -970,29 +982,29 @@ state 53
 
 state 54
 
-    (38) stmt_while -> while expr block .
+    (39) stmt_while -> while expr block .
 
-    N               reduce using rule 38 (stmt_while -> while expr block .)
+    N               reduce using rule 39 (stmt_while -> while expr block .)
 
 
 state 55
 
-    (33) stmt_def -> set NUMBER DOT paramlist . block
-    (47) block -> . open_block N
-    (45) open_block -> . stmt
-    (46) open_block -> . open_block stmt
-    (39) stmt -> . stmt_def
-    (40) stmt -> . stmt_set
-    (41) stmt -> . stmt_ret
-    (42) stmt -> . stmt_if
-    (43) stmt -> . stmt_elif
-    (44) stmt -> . stmt_while
-    (33) stmt_def -> . set NUMBER DOT paramlist block
-    (34) stmt_set -> . set NUMBER DOT expr
-    (35) stmt_ret -> . set ZERO ZERO DOT expr
-    (36) stmt_if -> . if expr block
-    (37) stmt_elif -> . stmt_if else block
-    (38) stmt_while -> . while expr block
+    (34) stmt_def -> set NUMBER DOT paramlist . block
+    (48) block -> . open_block N
+    (46) open_block -> . stmt
+    (47) open_block -> . open_block stmt
+    (40) stmt -> . stmt_def
+    (41) stmt -> . stmt_set
+    (42) stmt -> . stmt_ret
+    (43) stmt -> . stmt_if
+    (44) stmt -> . stmt_elif
+    (45) stmt -> . stmt_while
+    (34) stmt_def -> . set NUMBER DOT paramlist block
+    (35) stmt_set -> . set NUMBER DOT expr
+    (36) stmt_ret -> . set ZERO ZERO DOT expr
+    (37) stmt_if -> . if expr block
+    (38) stmt_elif -> . stmt_if else block
+    (39) stmt_while -> . while expr block
     (14) set -> . N M
     (15) if -> . N D
     (17) while -> . N A D
@@ -1000,7 +1012,7 @@ state 55
     N               shift and go to state 3
 
     set                            shift and go to state 12
-    block                          shift and go to state 73
+    block                          shift and go to state 74
     open_block                     shift and go to state 4
     stmt                           shift and go to state 5
     stmt_def                       shift and go to state 6
@@ -1014,11 +1026,11 @@ state 55
 
 state 56
 
-    (34) stmt_set -> set NUMBER DOT expr .
-    (29) expr -> expr . op0 expr
-    (30) expr -> expr . op1 expr
-    (31) expr -> expr . op2 expr
-    (32) expr -> expr . op3 expr
+    (35) stmt_set -> set NUMBER DOT expr .
+    (30) expr -> expr . op0 expr
+    (31) expr -> expr . op1 expr
+    (32) expr -> expr . op2 expr
+    (33) expr -> expr . op3 expr
     (3) op0 -> . DOT DOT
     (4) op0 -> . DOT S
     (5) op0 -> . DOT A
@@ -1031,7 +1043,7 @@ state 56
     (12) op3 -> . D S
     (13) op3 -> . M S
 
-    N               reduce using rule 34 (stmt_set -> set NUMBER DOT expr .)
+    N               reduce using rule 35 (stmt_set -> set NUMBER DOT expr .)
     DOT             shift and go to state 44
     S               shift and go to state 45
     A               shift and go to state 46
@@ -1045,27 +1057,28 @@ state 56
 
 state 57
 
-    (22) paramlist -> N . NUMBER DOT
-    (23) paramlist -> N . NUMBER DOT DOT NUMBER paramlist
+    (23) paramlist -> N . NUMBER DOT
+    (24) paramlist -> N . NUMBER DOT DOT NUMBER paramlist
 
-    NUMBER          shift and go to state 74
+    NUMBER          shift and go to state 75
 
 
 state 58
 
-    (35) stmt_ret -> set ZERO ZERO DOT . expr
-    (24) expr -> . NUMBER
-    (25) expr -> . ZERO NUMBER
-    (26) expr -> . ZERO
-    (27) expr -> . var
-    (28) expr -> . list
-    (29) expr -> . expr op0 expr
-    (30) expr -> . expr op1 expr
-    (31) expr -> . expr op2 expr
-    (32) expr -> . expr op3 expr
+    (36) stmt_ret -> set ZERO ZERO DOT . expr
+    (25) expr -> . NUMBER
+    (26) expr -> . ZERO NUMBER
+    (27) expr -> . ZERO
+    (28) expr -> . var
+    (29) expr -> . list
+    (30) expr -> . expr op0 expr
+    (31) expr -> . expr op1 expr
+    (32) expr -> . expr op2 expr
+    (33) expr -> . expr op3 expr
     (1) var -> . M NUMBER
     (2) var -> . M ZERO NUMBER
     (21) list -> . list_open expr D DOT
+    (22) list -> . D DOT DOT D
     (18) list_open -> . D DOT
     (19) list_open -> . list_open expr DOT
     (20) list_open -> . list_open expr DOT N
@@ -1075,18 +1088,18 @@ state 58
     M               shift and go to state 30
     D               shift and go to state 32
 
-    expr                           shift and go to state 75
+    expr                           shift and go to state 76
     var                            shift and go to state 28
     list                           shift and go to state 29
     list_open                      shift and go to state 31
 
 state 59
 
-    (29) expr -> expr op0 expr .
-    (29) expr -> expr . op0 expr
-    (30) expr -> expr . op1 expr
-    (31) expr -> expr . op2 expr
-    (32) expr -> expr . op3 expr
+    (30) expr -> expr op0 expr .
+    (30) expr -> expr . op0 expr
+    (31) expr -> expr . op1 expr
+    (32) expr -> expr . op2 expr
+    (33) expr -> expr . op3 expr
     (3) op0 -> . DOT DOT
     (4) op0 -> . DOT S
     (5) op0 -> . DOT A
@@ -1099,12 +1112,12 @@ state 59
     (12) op3 -> . D S
     (13) op3 -> . M S
 
-    DOT             reduce using rule 29 (expr -> expr op0 expr .)
-    S               reduce using rule 29 (expr -> expr op0 expr .)
-    A               reduce using rule 29 (expr -> expr op0 expr .)
-    D               reduce using rule 29 (expr -> expr op0 expr .)
-    M               reduce using rule 29 (expr -> expr op0 expr .)
-    N               reduce using rule 29 (expr -> expr op0 expr .)
+    DOT             reduce using rule 30 (expr -> expr op0 expr .)
+    S               reduce using rule 30 (expr -> expr op0 expr .)
+    A               reduce using rule 30 (expr -> expr op0 expr .)
+    D               reduce using rule 30 (expr -> expr op0 expr .)
+    M               reduce using rule 30 (expr -> expr op0 expr .)
+    N               reduce using rule 30 (expr -> expr op0 expr .)
 
   ! DOT             [ shift and go to state 44 ]
   ! S               [ shift and go to state 45 ]
@@ -1119,11 +1132,11 @@ state 59
 
 state 60
 
-    (30) expr -> expr op1 expr .
-    (29) expr -> expr . op0 expr
-    (30) expr -> expr . op1 expr
-    (31) expr -> expr . op2 expr
-    (32) expr -> expr . op3 expr
+    (31) expr -> expr op1 expr .
+    (30) expr -> expr . op0 expr
+    (31) expr -> expr . op1 expr
+    (32) expr -> expr . op2 expr
+    (33) expr -> expr . op3 expr
     (3) op0 -> . DOT DOT
     (4) op0 -> . DOT S
     (5) op0 -> . DOT A
@@ -1136,12 +1149,12 @@ state 60
     (12) op3 -> . D S
     (13) op3 -> . M S
 
-    DOT             reduce using rule 30 (expr -> expr op1 expr .)
-    S               reduce using rule 30 (expr -> expr op1 expr .)
-    A               reduce using rule 30 (expr -> expr op1 expr .)
-    D               reduce using rule 30 (expr -> expr op1 expr .)
-    M               reduce using rule 30 (expr -> expr op1 expr .)
-    N               reduce using rule 30 (expr -> expr op1 expr .)
+    DOT             reduce using rule 31 (expr -> expr op1 expr .)
+    S               reduce using rule 31 (expr -> expr op1 expr .)
+    A               reduce using rule 31 (expr -> expr op1 expr .)
+    D               reduce using rule 31 (expr -> expr op1 expr .)
+    M               reduce using rule 31 (expr -> expr op1 expr .)
+    N               reduce using rule 31 (expr -> expr op1 expr .)
 
   ! DOT             [ shift and go to state 44 ]
   ! S               [ shift and go to state 45 ]
@@ -1156,11 +1169,11 @@ state 60
 
 state 61
 
-    (31) expr -> expr op2 expr .
-    (29) expr -> expr . op0 expr
-    (30) expr -> expr . op1 expr
-    (31) expr -> expr . op2 expr
-    (32) expr -> expr . op3 expr
+    (32) expr -> expr op2 expr .
+    (30) expr -> expr . op0 expr
+    (31) expr -> expr . op1 expr
+    (32) expr -> expr . op2 expr
+    (33) expr -> expr . op3 expr
     (3) op0 -> . DOT DOT
     (4) op0 -> . DOT S
     (5) op0 -> . DOT A
@@ -1173,12 +1186,12 @@ state 61
     (12) op3 -> . D S
     (13) op3 -> . M S
 
-    DOT             reduce using rule 31 (expr -> expr op2 expr .)
-    S               reduce using rule 31 (expr -> expr op2 expr .)
-    A               reduce using rule 31 (expr -> expr op2 expr .)
-    D               reduce using rule 31 (expr -> expr op2 expr .)
-    M               reduce using rule 31 (expr -> expr op2 expr .)
-    N               reduce using rule 31 (expr -> expr op2 expr .)
+    DOT             reduce using rule 32 (expr -> expr op2 expr .)
+    S               reduce using rule 32 (expr -> expr op2 expr .)
+    A               reduce using rule 32 (expr -> expr op2 expr .)
+    D               reduce using rule 32 (expr -> expr op2 expr .)
+    M               reduce using rule 32 (expr -> expr op2 expr .)
+    N               reduce using rule 32 (expr -> expr op2 expr .)
 
   ! DOT             [ shift and go to state 44 ]
   ! S               [ shift and go to state 45 ]
@@ -1193,11 +1206,11 @@ state 61
 
 state 62
 
-    (32) expr -> expr op3 expr .
-    (29) expr -> expr . op0 expr
-    (30) expr -> expr . op1 expr
-    (31) expr -> expr . op2 expr
-    (32) expr -> expr . op3 expr
+    (33) expr -> expr op3 expr .
+    (30) expr -> expr . op0 expr
+    (31) expr -> expr . op1 expr
+    (32) expr -> expr . op2 expr
+    (33) expr -> expr . op3 expr
     (3) op0 -> . DOT DOT
     (4) op0 -> . DOT S
     (5) op0 -> . DOT A
@@ -1210,12 +1223,12 @@ state 62
     (12) op3 -> . D S
     (13) op3 -> . M S
 
-    DOT             reduce using rule 32 (expr -> expr op3 expr .)
-    S               reduce using rule 32 (expr -> expr op3 expr .)
-    A               reduce using rule 32 (expr -> expr op3 expr .)
-    D               reduce using rule 32 (expr -> expr op3 expr .)
-    M               reduce using rule 32 (expr -> expr op3 expr .)
-    N               reduce using rule 32 (expr -> expr op3 expr .)
+    DOT             reduce using rule 33 (expr -> expr op3 expr .)
+    S               reduce using rule 33 (expr -> expr op3 expr .)
+    A               reduce using rule 33 (expr -> expr op3 expr .)
+    D               reduce using rule 33 (expr -> expr op3 expr .)
+    M               reduce using rule 33 (expr -> expr op3 expr .)
+    N               reduce using rule 33 (expr -> expr op3 expr .)
 
   ! DOT             [ shift and go to state 44 ]
   ! S               [ shift and go to state 45 ]
@@ -1317,7 +1330,7 @@ state 71
     (10) op3 -> D . A
     (12) op3 -> D . S
 
-    DOT             shift and go to state 76
+    DOT             shift and go to state 77
     NUMBER          reduce using rule 8 (op2 -> D .)
     ZERO            reduce using rule 8 (op2 -> D .)
     M               reduce using rule 8 (op2 -> D .)
@@ -1338,7 +1351,7 @@ state 72
     ZERO            reduce using rule 19 (list_open -> list_open expr DOT .)
     M               reduce using rule 19 (list_open -> list_open expr DOT .)
     D               reduce using rule 19 (list_open -> list_open expr DOT .)
-    N               shift and go to state 77
+    N               shift and go to state 78
     DOT             shift and go to state 63
     S               shift and go to state 64
     A               shift and go to state 65
@@ -1346,26 +1359,33 @@ state 72
 
 state 73
 
-    (33) stmt_def -> set NUMBER DOT paramlist block .
+    (22) list -> D DOT DOT . D
 
-    N               reduce using rule 33 (stmt_def -> set NUMBER DOT paramlist block .)
+    D               shift and go to state 79
 
 
 state 74
 
-    (22) paramlist -> N NUMBER . DOT
-    (23) paramlist -> N NUMBER . DOT DOT NUMBER paramlist
+    (34) stmt_def -> set NUMBER DOT paramlist block .
 
-    DOT             shift and go to state 78
+    N               reduce using rule 34 (stmt_def -> set NUMBER DOT paramlist block .)
 
 
 state 75
 
-    (35) stmt_ret -> set ZERO ZERO DOT expr .
-    (29) expr -> expr . op0 expr
-    (30) expr -> expr . op1 expr
-    (31) expr -> expr . op2 expr
-    (32) expr -> expr . op3 expr
+    (23) paramlist -> N NUMBER . DOT
+    (24) paramlist -> N NUMBER . DOT DOT NUMBER paramlist
+
+    DOT             shift and go to state 80
+
+
+state 76
+
+    (36) stmt_ret -> set ZERO ZERO DOT expr .
+    (30) expr -> expr . op0 expr
+    (31) expr -> expr . op1 expr
+    (32) expr -> expr . op2 expr
+    (33) expr -> expr . op3 expr
     (3) op0 -> . DOT DOT
     (4) op0 -> . DOT S
     (5) op0 -> . DOT A
@@ -1378,7 +1398,7 @@ state 75
     (12) op3 -> . D S
     (13) op3 -> . M S
 
-    N               reduce using rule 35 (stmt_ret -> set ZERO ZERO DOT expr .)
+    N               reduce using rule 36 (stmt_ret -> set ZERO ZERO DOT expr .)
     DOT             shift and go to state 44
     S               shift and go to state 45
     A               shift and go to state 46
@@ -1390,7 +1410,7 @@ state 75
     op2                            shift and go to state 42
     op3                            shift and go to state 43
 
-state 76
+state 77
 
     (21) list -> list_open expr D DOT .
 
@@ -1402,7 +1422,7 @@ state 76
     N               reduce using rule 21 (list -> list_open expr D DOT .)
 
 
-state 77
+state 78
 
     (20) list_open -> list_open expr DOT N .
 
@@ -1412,35 +1432,47 @@ state 77
     D               reduce using rule 20 (list_open -> list_open expr DOT N .)
 
 
-state 78
-
-    (22) paramlist -> N NUMBER DOT .
-    (23) paramlist -> N NUMBER DOT . DOT NUMBER paramlist
-
-    N               reduce using rule 22 (paramlist -> N NUMBER DOT .)
-    DOT             shift and go to state 79
-
-
 state 79
 
-    (23) paramlist -> N NUMBER DOT DOT . NUMBER paramlist
+    (22) list -> D DOT DOT D .
 
-    NUMBER          shift and go to state 80
+    DOT             reduce using rule 22 (list -> D DOT DOT D .)
+    S               reduce using rule 22 (list -> D DOT DOT D .)
+    A               reduce using rule 22 (list -> D DOT DOT D .)
+    D               reduce using rule 22 (list -> D DOT DOT D .)
+    M               reduce using rule 22 (list -> D DOT DOT D .)
+    N               reduce using rule 22 (list -> D DOT DOT D .)
 
 
 state 80
 
-    (23) paramlist -> N NUMBER DOT DOT NUMBER . paramlist
-    (22) paramlist -> . N NUMBER DOT
-    (23) paramlist -> . N NUMBER DOT DOT NUMBER paramlist
+    (23) paramlist -> N NUMBER DOT .
+    (24) paramlist -> N NUMBER DOT . DOT NUMBER paramlist
 
-    N               shift and go to state 57
+    N               reduce using rule 23 (paramlist -> N NUMBER DOT .)
+    DOT             shift and go to state 81
 
-    paramlist                      shift and go to state 81
 
 state 81
 
-    (23) paramlist -> N NUMBER DOT DOT NUMBER paramlist .
+    (24) paramlist -> N NUMBER DOT DOT . NUMBER paramlist
 
-    N               reduce using rule 23 (paramlist -> N NUMBER DOT DOT NUMBER paramlist .)
+    NUMBER          shift and go to state 82
+
+
+state 82
+
+    (24) paramlist -> N NUMBER DOT DOT NUMBER . paramlist
+    (23) paramlist -> . N NUMBER DOT
+    (24) paramlist -> . N NUMBER DOT DOT NUMBER paramlist
+
+    N               shift and go to state 57
+
+    paramlist                      shift and go to state 83
+
+state 83
+
+    (24) paramlist -> N NUMBER DOT DOT NUMBER paramlist .
+
+    N               reduce using rule 24 (paramlist -> N NUMBER DOT DOT NUMBER paramlist .)
 
