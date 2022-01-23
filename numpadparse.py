@@ -68,7 +68,8 @@ def p_list_create(p):
     p[0] = []
 
 def p_list_append(p):
-    'list_open : list_open expr DOT'
+    '''list_open : list_open expr DOT
+                 | list_open expr DOT N'''
     p[0] = p[1] + [p[2]]
 
 def p_list_close(p):
