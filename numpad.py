@@ -95,7 +95,10 @@ class Scope:
                 if isinstance(i, str):
                     i = self.get_value(i)
                 to_change = to_change[i]
-            to_change[indices[-1]] = value
+            i = indices[-1]
+            if isinstance(i, str):
+                i = self.get_value(i)
+            to_change[i] = value
 
     def parent(self):
         """Get the parent scope.

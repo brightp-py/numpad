@@ -115,8 +115,11 @@ def load_program(file_path):
     
     if VERBOSE:
         to_print = '\n'.join(f"{str(i)}\t{line}"
-                             for i, line in enumerate(final_text.split('\n')))
-        print(to_print)
+                             for i, line in enumerate(
+                                final_text.split('\n')
+                                )
+                             )
+        print(to_print.split('\n', maxsplit=1)[1])
 
     program = parser.parse(final_text)
     return program
